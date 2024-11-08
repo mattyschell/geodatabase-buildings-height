@@ -12,7 +12,7 @@ See the data directory, this prep is prep'd.
 
 * Export elevations with feature_code equal to 300000 as a shapefile named spot_elevation.shp to the data directory.  Zip that bad boy.
 
-Don't bother with removing columns, the ArcGIS Pro GUI is uncooperative when also selecting a subset of records.
+Don't bother with removing columns, the ArcGIS Pro GUI requires a galaxy brain when also selecting a subset of records.
 
 ## Database Setup
 
@@ -27,16 +27,30 @@ export PGDATABASE=postgres
 ./setup.sh
 ```
 
-## Evaluate Heights
+## Generate Output for Buildings With Null or Zero Height
 
-This is a work in progress...
+```shell
+export PGPASSWORD=<scratch password from setup>
+export PGHOST=<your postgres host>
+export PGUSER=bldg
+export PGDATABASE=buildingscratch
+./generate-nullzero-output.sh
+```
 
-### Evaluate Buildings With NULL or 0 Height
+See output\buildings_missing_height.csv
 
-See /sql/buildings-missing-heights.sql
-
-### Evaluate Buildings With Suspect Heights
+## Evaluate Buildings With Suspect Heights
 
 TBD
 
 
+## Remove data\temp and Teardown Database
+
+```shell
+export BLDGPASSWORD=<scratch password from setup>
+export PGUSER=postgres
+export PGPASSWORD=<your postgres password>
+export PGHOST=<your postgres host>
+export PGDATABASE=postgres
+./teardown.sh
+```

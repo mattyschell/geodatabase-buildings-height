@@ -9,3 +9,4 @@ SET client_min_messages TO WARNING;
 \i ./data/temp/elevation.sql
 \i ./data/temp/spot_elevation.sql
 \i ./data/create-spatial-indexes.sql
+\i ./data/create-building_height.sql
