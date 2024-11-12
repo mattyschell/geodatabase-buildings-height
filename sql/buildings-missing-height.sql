@@ -26,7 +26,7 @@ on
   st_intersects(e.geom, b.geom)
 where 
     (b.height_roo is null or b.height_roo = 0)
-and created_da < '2022-01-01';
+and (created_da < '2022-01-01' or created_da is null);
 --
 -- other boroughs here I guess
 --
