@@ -54,3 +54,12 @@ export PGHOST=<your postgres host>
 export PGDATABASE=postgres
 ./teardown.sh
 ```
+
+## Examples
+
+| BIN | Height Roof OTI | Planimetrics | Planimetrics Data | Visual Check |
+| --- | --- | --- | --- | --- |
+| 5166155 | null | 201 | ![image](./doc/plan-5166155.png) | ![image](./doc/bis-5166155.png) |
+| 5166990 | 166 | 36 | ![image](./doc/plan-5166990.png) | ![image](./doc/cyclo-5166990.png) |
+| 1090524 | 264 | 804 | ![image](./doc/plan-1090524.png) | ![image](./doc/bis-1090524.png) |
+
