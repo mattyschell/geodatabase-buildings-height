@@ -19,7 +19,7 @@ select
    ,b.last_edi_1
    ,e.building_height
 from 
-  bldg.building5 b
+  bldg.building1 b
 join 
   bldg.building_height e
 on 
@@ -28,5 +28,28 @@ where
     (b.height_roo is null or b.height_roo = 0)
 and (created_da < '2022-01-01' or created_da is null);
 --
--- other boroughs here I guess
+--2
+--3
+--4
 --
+insert into buildings_missing_height (
+    bin
+   ,doitt_id
+   ,created_date
+   ,last_edited_date
+   ,planimetrics_height)
+select 
+    b.bin
+   ,b.doitt_id
+   ,b.created_da
+   ,b.last_edi_1
+   ,e.building_height
+from 
+  bldg.building5 b
+join 
+  bldg.building_height e
+on 
+  st_intersects(e.geom, b.geom)
+where 
+    (b.height_roo is null or b.height_roo = 0)
+and (created_da < '2022-01-01' or created_da is null);
