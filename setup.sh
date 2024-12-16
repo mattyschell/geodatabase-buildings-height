@@ -23,6 +23,11 @@ shp2pgsql -s 2263 -c ./data/temp/elevation.shp elevation > ./data/temp/elevation
 echo "Unzipping and generating SQL for spot elevation"
 unzip ./data/spot_elevation.zip -d ./data/temp
 shp2pgsql -s 2263 -c ./data/temp/spot_elevation.shp spot_elevation > ./data/temp/spot_elevation.sql
+# in lieu of nailing down paths in copy
+echo "Loading planimetrics building heights from csv"
+cd data
+psql -f create-bin-height.sql
+cd ../
 echo "loading and generating derived data in $PGDATABASE on $PGHOST"
 psql -f ./data/all.sql
 

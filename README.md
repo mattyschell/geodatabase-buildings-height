@@ -14,6 +14,9 @@ See the data directory, this prep is prep'd.
 
 Don't bother with removing columns, the ArcGIS Pro GUI requires a galaxy brain when also selecting a subset of records.
 
+* Create a table from planimetrics 2022 "building_footprint" with columns bin, height_roof.  This is bin_height.csv in the data directory.
+
+
 ## Database Setup
 
 Create and load a scratch PostGIS database.

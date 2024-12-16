@@ -1,7 +1,7 @@
 -- after unzipping and loading the input data
 -- create building heights from building elevation minus nearest spot elevation
 -- this is the dataset we will use 
--- elevation = builidng elevation (poor naming choice)
+-- elevation = building elevation (poor naming choice)
 -- spot_elevation = all spot elevations
 -- i am including spot_distance in case some buildings are so far from their 
 --     nearest spot elevation as to generate suspect heights
