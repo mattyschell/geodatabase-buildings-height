@@ -1,10 +1,21 @@
 # geodatabase-buildings-height
 
-Update [geodatabase-buildings](https://github.com/mattyschell/geodatabase-buildings) height_roof using planimetrics [elevation](https://github.com/CityOfNewYork/nyc-planimetrics/blob/main/Capture_Rules.md#subtype-building-elevation) data.  Let's work in PostGIS to troll ourselves.
+Update [geodatabase-buildings](https://github.com/mattyschell/geodatabase-buildings) height_roof using [planimetrics](https://github.com/CityOfNewYork/nyc-planimetrics/blob/main/Capture_Rules.md) data.  Let's work in PostGIS to troll ourselves.
+
+We have 2 goals.  
+
+1. Update buildings with NULL or 0 height_roof.  Do this automatically.
+2. Update buildings with suspect heights.  When confident do this automatically.  When not confident send to manual review.
+
+We will use two input datasets.  When these datasets agree we have confidence.
+
+1. Planimetrics spot elevations spatially joined to live building shapes
+2. Planimetrics buildings height_roof joined on BIN. (use this for updates)
+
 
 ## Manual Preparation
 
-See the data directory, this prep is prep'd.  
+This prep is prep'd.  It is in the data directory.
 
 * Export buildings by borough as 5 shapefiles to the data/ directory as building1.shp, building2.shp etc.  Zip each shapefile up for version control, we wish to slide underneath the github limit of 100MB.
 
@@ -14,7 +25,7 @@ See the data directory, this prep is prep'd.
 
 Don't bother with removing columns, the ArcGIS Pro GUI requires a galaxy brain when also selecting a subset of records.
 
-* Create a table from planimetrics 2022 "building_footprint" with columns bin, height_roof.  This is bin_height.csv in the data directory.
+* Create a table from planimetrics 2022 "building_footprint" with columns bin, height_roof. This is bin_height.csv in the data directory.
 
 
 ## Database Setup
@@ -40,7 +51,9 @@ export PGDATABASE=buildingscratch
 ./generate-nullzero-output.sh
 ```
 
-See output\buildings_missing_height.csv
+See
+* output\buildings_missing_height.csv 
+* output\bins_missing_height.csv 
 
 ## Evaluate Buildings With Suspect Heights
 

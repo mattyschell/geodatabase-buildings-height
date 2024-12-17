@@ -1,7 +1,7 @@
 drop table if exists 
-    buildings_missing_height;
+    bins_missing_height;
 --
-create table buildings_missing_height (
+create table bins_missing_height (
     bin numeric,
     doitt_id numeric,
     created_date date,
@@ -9,7 +9,7 @@ create table buildings_missing_height (
     planimetrics_height numeric
 );
 --
-insert into buildings_missing_height (
+insert into bins_missing_height (
     bin
    ,doitt_id
    ,created_date
@@ -20,22 +20,22 @@ select
    ,b.doitt_id
    ,b.created_da
    ,b.last_edi_1
-   ,e.building_height
+   ,e.height_roof
 from 
   bldg.building1 b
 join 
-  bldg.building_height e
+  bldg.bin_height e
 on 
-  st_intersects(e.geom, b.geom)
+  b.bin = e.bin
 where 
     (b.height_roo is null or b.height_roo = 0)
-and (created_da < '2022-01-01' or created_da is null);
+and (b.created_da < '2022-01-01' or b.created_da is null);
 --
 --2
 --3
 --4
 --
-insert into buildings_missing_height (
+insert into bins_missing_height (
     bin
    ,doitt_id
    ,created_date
@@ -46,29 +46,29 @@ select
    ,b.doitt_id
    ,b.created_da
    ,b.last_edi_1
-   ,e.building_height
+   ,e.height_roof
 from 
   bldg.building5 b
 join 
-  bldg.building_height e
+  bldg.bin_height e
 on 
-  st_intersects(e.geom, b.geom)
+  b.bin = e.bin
 where 
     (b.height_roo is null or b.height_roo = 0)
-and (created_da < '2022-01-01' or created_da is null);
--- this is 2 more more elevations on a footprint
--- toss these it means we have no confidence in 
--- using this strategy for these buildings
+and (b.created_da < '2022-01-01' or b.created_da is null);
+-- this is bad planimetrics input
+-- splits or similar where the capture rules were ignored
+-- toss these (approximately 10) we do not trust it
 delete from 
-    buildings_missing_height
+    bins_missing_height
 where 
     bin in (select 
                 bin 
             from 
-                buildings_missing_height
+                bins_missing_height
             group by bin
             having count(*) > 1);
 alter table 
-    buildings_missing_height
+    bins_missing_height
 add 
     primary key (bin);
