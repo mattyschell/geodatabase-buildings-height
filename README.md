@@ -17,7 +17,7 @@ We will use two input datasets.  When these datasets agree we have confidence.
 
 This prep is prep'd.  It is in the data directory.
 
-* Export buildings by borough as 5 shapefiles to the data/ directory as building1.shp, building2.shp etc.  Zip each shapefile up for version control, we wish to slide underneath the github limit of 100MB.
+* Export buildings by borough as 5 shapefiles to the data/ directory as building1.shp, building2.shp etc.  Zip each shapefile up for version control, we wish to slide underneath the github limit of 100MB.  Borough-based processing also is a more reasonable workpace for the later steps. 
 
 * Export elevations with feature_code equal to 3020 as a shapefile named elevation.shp to the data directory.  Zip it also.
 
@@ -43,17 +43,19 @@ export PGDATABASE=postgres
 
 ## Generate Output for Buildings With Null or Zero Height
 
+Tweak the where clause values in sql/bins-missing-height-output.sql to shunt more values into auto-update or into manual review.
+
 ```shell
 export PGPASSWORD=<scratch password from setup>
 export PGHOST=<your postgres host>
 export PGUSER=bldg
 export PGDATABASE=buildingscratch
-./generate-nullzero-output.sh
+./generate-missing-height-output.sh
 ```
 
 See
-* output\buildings_missing_height.csv 
-* output\bins_missing_height.csv 
+* output\bins_missing_height_update.csv 
+* output\bins_missing_height_review.csv 
 
 ## Evaluate Buildings With Suspect Heights
 

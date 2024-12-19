@@ -8,7 +8,7 @@ create table bins_missing_height (
     last_edited_date date,
     planimetrics_height numeric
 );
---
+-- 1
 insert into bins_missing_height (
     bin
    ,doitt_id
@@ -22,19 +22,15 @@ select
    ,b.last_edi_1
    ,e.height_roof
 from 
-  bldg.building1 b
+    bldg.building1 b
 join 
-  bldg.bin_height e
+    bldg.bin_height e
 on 
-  b.bin = e.bin
+    b.bin = e.bin
 where 
     (b.height_roo is null or b.height_roo = 0)
 and (b.created_da < '2022-01-01' or b.created_da is null);
---
---2
---3
---4
---
+-- 2
 insert into bins_missing_height (
     bin
    ,doitt_id
@@ -48,11 +44,77 @@ select
    ,b.last_edi_1
    ,e.height_roof
 from 
-  bldg.building5 b
+    bldg.building2 b
 join 
-  bldg.bin_height e
+    bldg.bin_height e
 on 
-  b.bin = e.bin
+    b.bin = e.bin
+where 
+    (b.height_roo is null or b.height_roo = 0)
+and (b.created_da < '2022-01-01' or b.created_da is null);
+-- 3
+insert into bins_missing_height (
+    bin
+   ,doitt_id
+   ,created_date
+   ,last_edited_date
+   ,planimetrics_height)
+select 
+    b.bin
+   ,b.doitt_id
+   ,b.created_da
+   ,b.last_edi_1
+   ,e.height_roof
+from 
+    bldg.building3 b
+join 
+    bldg.bin_height e
+on 
+    b.bin = e.bin
+where 
+    (b.height_roo is null or b.height_roo = 0)
+and (b.created_da < '2022-01-01' or b.created_da is null);
+-- 4
+insert into bins_missing_height (
+    bin
+   ,doitt_id
+   ,created_date
+   ,last_edited_date
+   ,planimetrics_height)
+select 
+    b.bin
+   ,b.doitt_id
+   ,b.created_da
+   ,b.last_edi_1
+   ,e.height_roof
+from 
+    bldg.building4 b
+join 
+    bldg.bin_height e
+on 
+    b.bin = e.bin
+where 
+    (b.height_roo is null or b.height_roo = 0)
+and (b.created_da < '2022-01-01' or b.created_da is null);
+-- 5
+insert into bins_missing_height (
+    bin
+   ,doitt_id
+   ,created_date
+   ,last_edited_date
+   ,planimetrics_height)
+select 
+    b.bin
+   ,b.doitt_id
+   ,b.created_da
+   ,b.last_edi_1
+   ,e.height_roof
+from 
+    bldg.building5 b
+join 
+    bldg.bin_height e
+on 
+    b.bin = e.bin
 where 
     (b.height_roo is null or b.height_roo = 0)
 and (b.created_da < '2022-01-01' or b.created_da is null);
