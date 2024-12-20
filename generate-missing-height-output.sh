@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 echo "generating missing height output in $PGDATABASE on $PGHOST"
 echo "using spot elevations to populate BUILDINGS_missing_height"
 psql -f ./sql/buildings-missing-height.sql

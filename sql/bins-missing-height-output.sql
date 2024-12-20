@@ -7,9 +7,9 @@ create table
     bins_missing_height_update as
 select 
      a.bin
-    ,abs(a.planimetrics_height - b.planimetrics_height) as height_diff
-    ,a.planimetrics_height as bin_height  
-    ,b.planimetrics_height as spot_height
+    ,ceil(a.planimetrics_height) as planimetrics_height  
+    ,ceil(b.planimetrics_height) as planimetrics_spot_height_calc
+    ,ceil(abs(a.planimetrics_height - b.planimetrics_height)) as height_diff
 from 
     bins_missing_height a
 join 
@@ -24,9 +24,9 @@ create table
     bins_missing_height_review as
 select 
      a.bin
-    ,a.planimetrics_height as planimetrics_height  
-    ,b.planimetrics_height as planimetrics_spot_height_calc
-    ,abs(a.planimetrics_height - b.planimetrics_height) as height_diff
+    ,ceil(a.planimetrics_height) as planimetrics_height  
+    ,ceil(b.planimetrics_height) as planimetrics_spot_height_calc
+    ,ceil(abs(a.planimetrics_height - b.planimetrics_height)) as height_diff
 from 
     bins_missing_height a
 join 
