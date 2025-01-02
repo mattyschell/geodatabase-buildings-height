@@ -59,8 +59,17 @@ See
 
 ## Evaluate Buildings With Suspect Heights
 
-TBD
+```shell
+#!/usr/bin/env bash
+export PGPASSWORD=<scratch password from setup>
+export PGHOST=<your postgres host>
+export PGUSER=bldg
+export PGDATABASE=buildingscratch
+./generate-difference-output.sh
+```
 
+See
+* .\output\bins_height_difference_review.csv
 
 ## Remove data\temp and Teardown Database
 
